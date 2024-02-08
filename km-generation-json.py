@@ -11,7 +11,7 @@ import time
 
 crypto_tail44 = '\u001D91FFD0\u001D92fFgWxK0YxoHt5EB2J1+Keut9iQMm4lQFZMdgsFM97Hg='
 gtn = '04604060998657'
-url = "https://10.77.124.52:8443/v1/requests"
+url = "https://10.77.124.104:8443/v1/requests"
 headers = {
     'Content-Type': 'application/json',
     'Authorization': 'Basic dXNlcjI6cXdFMTIzeHg='
@@ -30,16 +30,16 @@ urllib3.disable_warnings()
 
 status_code = 201
 number = 0
-uri_list = [str(uuid4()) for _ in range(3)]
+uri_list = [str(uuid4()) for _ in range(10)]
 print(len(uri_list))
 start_post_time = time.time()
 
-while status_code == 201 and number < 3:
+while status_code == 201 and number < 10:
     documentID = uri_list[number]
     number += 1
 
     # Генерация случайного количества марок
-    marks_count = random.randint(1000, 2000)
+    marks_count = random.randint(100, 200)
     marks = {"{}".format(i): {"mark": generate_base64_km(gtn, crypto_tail44)} for i in range(1, marks_count + 1)}
 
     payload = json.dumps({
@@ -69,7 +69,7 @@ number = 0
 start_get_time = time.time()
 payload = {}
 
-while status_code == 200 and number < 3:
+while status_code == 200 and number < 10:
     documentID = uri_list[number]
     number += 1
     get_url = url + '/' + documentID
